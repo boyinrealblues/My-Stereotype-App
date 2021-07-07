@@ -1,12 +1,14 @@
 package com.example.stereotype.UI
 
 import android.app.Activity
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Layout
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -25,10 +27,15 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if(savedInstanceState==null)
+        {
+            supportFragmentManager.commit {
+                add<BlankFragment3>(R.id.container)
+                setReorderingAllowed(true)
+            }
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
         setSupportActionBar(binding.toolbar)
-
         binding.bottomNavView.setOnNavigationItemSelectedListener(this)
 
     }
@@ -51,18 +58,17 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
 
   inline fun <reified T : Fragment> fragmentTransaction(){
 
-        if(supportFragmentManager.fragments.size==0)
+      if(supportFragmentManager.fragments.size==0)
                 supportFragmentManager.commit{
                     add<T>(R.id.container)
-                    addToBackStack(null)
                     setReorderingAllowed(true)
                 }
             else
                 supportFragmentManager.commit{
                     replace<T>(R.id.container)
-                    addToBackStack(null)
                     setReorderingAllowed(true)
                 }
     }
+
 
 }
