@@ -16,5 +16,4 @@ class BlankFragment : Fragment() {
        return  DataBindingUtil.inflate<FragmentBlankBinding>(inflater, R.layout.fragment_blank,container,false).root
     }
 
-
 }

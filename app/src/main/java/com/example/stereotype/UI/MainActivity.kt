@@ -37,28 +37,21 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
 
         when(item.itemId){
             R.id.list_menu_item -> {
-                if(supportFragmentManager.fragments.size==0)
-                fragmentTransaction<BlankFragment>(true)
-                else
-                    fragmentTransaction<BlankFragment>(false)
+                fragmentTransaction<BlankFragment>()
                 return true
             }
 
             R.id.person_menu_item -> {
-                if(supportFragmentManager.fragments.size==0)
-                    fragmentTransaction<BlankFragment2>(true)
-                else
-                    fragmentTransaction<BlankFragment2>(false)
-
+                fragmentTransaction<BlankFragment2>()
                 return true
             }
             else -> return false
         }
     }
 
-  inline fun <reified T : Fragment> fragmentTransaction(flag:Boolean){
+  inline fun <reified T : Fragment> fragmentTransaction(){
 
-        if(flag)
+        if(supportFragmentManager.fragments.size==0)
                 supportFragmentManager.commit{
                     add<T>(R.id.container)
                     addToBackStack(null)
