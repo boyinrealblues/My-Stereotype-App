@@ -18,8 +18,6 @@ class BlankFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.visibility = View.VISIBLE
-        activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.setNavigationIcon(R.drawable.ic_back)
         return  DataBindingUtil.inflate<FragmentBlankBinding>(inflater, R.layout.fragment_blank,container,false).root
     }
 

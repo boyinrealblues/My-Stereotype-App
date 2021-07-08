@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         if(savedInstanceState==null)
         {
             supportFragmentManager.commit {
@@ -37,7 +38,9 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
         binding.bottomNavView.setOnNavigationItemSelectedListener(this)
-
+        binding.toolbar.setNavigationOnClickListener{
+            supportFragmentManager.popBackStack()
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -58,12 +61,6 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
 
   inline fun <reified T : Fragment> fragmentTransaction(){
 
-      if(supportFragmentManager.fragments.size==0)
-                supportFragmentManager.commit{
-                    add<T>(R.id.container)
-                    setReorderingAllowed(true)
-                }
-            else
                 supportFragmentManager.commit{
                     replace<T>(R.id.container)
                     setReorderingAllowed(true)

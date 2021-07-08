@@ -13,6 +13,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.stereotype.R
 import com.example.stereotype.databinding.FragmentBlank3Binding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BlankFragment3 : Fragment() {
 
@@ -27,11 +28,20 @@ class BlankFragment3 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+            activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.visibility = View.INVISIBLE
+            activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.setNavigationIcon(R.drawable.ic_menu)
+
         binding.button.setOnClickListener {
+
             parentFragmentManager.commit{
                 replace<BlankFragment>(R.id.container)
+                activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.visibility = View.VISIBLE
+                activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.setNavigationIcon(R.drawable.ic_back)
+                addToBackStack(null)
                 setReorderingAllowed(true)
             }
+
         }
     }
 
