@@ -22,6 +22,7 @@ class BlankFragment3 : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        //Initialization
     binding = DataBindingUtil.inflate<FragmentBlank3Binding>(inflater,R.layout.fragment_blank3,container,false)
         return binding.root
     }
@@ -29,15 +30,14 @@ class BlankFragment3 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-            activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.visibility = View.INVISIBLE
-            activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.setNavigationIcon(R.drawable.ic_menu)
-
+            //On Home Fragment Enter make icon change also bottom nav hide
+        activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.visibility = View.INVISIBLE
+        activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.setNavigationIcon(R.drawable.ic_menu)
+        //On button tap , replace home fragment
         binding.button.setOnClickListener {
 
             parentFragmentManager.commit{
                 replace<BlankFragment>(R.id.container)
-                activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.visibility = View.VISIBLE
-                activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.setNavigationIcon(R.drawable.ic_back)
                 addToBackStack(null)
                 setReorderingAllowed(true)
             }

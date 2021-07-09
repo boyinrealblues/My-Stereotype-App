@@ -26,23 +26,27 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
+        //Suppose the activity gets destroyed, We are not redrawing it again
         if(savedInstanceState==null)
         {
+            //This block will be executed only once the activity is created
             supportFragmentManager.commit {
                 add<BlankFragment3>(R.id.container)
                 setReorderingAllowed(true)
             }
         }
+        //Initialization
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
         binding.bottomNavView.setOnNavigationItemSelectedListener(this)
+
+        //On Back button tap Move back to the home activity
         binding.toolbar.setNavigationOnClickListener{
             supportFragmentManager.popBackStack()
         }
     }
 
+    //Which tab in pressed , corresponds to which fragment is replaced and uploaded, Home fragment is getting replaced here
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId){
@@ -60,12 +64,34 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
     }
 
   inline fun <reified T : Fragment> fragmentTransaction(){
-
                 supportFragmentManager.commit{
                     replace<T>(R.id.container)
                     setReorderingAllowed(true)
                 }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e(TAG,"onDestroyed Called")
+    }
 
+    override fun onPause() {
+        super.onPause()
+        Log.e(TAG,"onPause Called")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.e(TAG,"onRestart Called")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.e(TAG,"onStart Called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e(TAG,"onResume Called")
+    }
 }
