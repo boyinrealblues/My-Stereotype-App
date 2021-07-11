@@ -2,6 +2,7 @@ package com.example.stereotype.UI
 
 import android.graphics.Insets.add
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,8 +20,8 @@ import com.example.stereotype.R
 import com.example.stereotype.databinding.FragmentBlank3Binding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+private const val TAG = "BlankFragment3"
 class BlankFragment3 : Fragment() {
-
 
   lateinit private var binding: FragmentBlank3Binding
 
@@ -41,14 +42,21 @@ class BlankFragment3 : Fragment() {
         }
         //On button tap , replace home fragment
             binding.button.setOnClickListener {
-
-                parentFragmentManager.commit{
-                    replace<BlankFragment>(R.id.container)
-                    addToBackStack(null)
-                    setReorderingAllowed(true)
+                    val str = arguments?.getString("123").also{
+                    }
+                    parentFragmentManager.commit {
+                        when(str ?: BlankFragment::class.toString()){
+                            BlankFragment::class.toString()->{
+                                replace<BlankFragment>(R.id.container)
+                            }
+                            BlankFragment2::class.toString()->{
+                                replace<BlankFragment2>(R.id.container)
+                            }
+                        }
+                        addToBackStack(null)
+                        setReorderingAllowed(true)
+                    }
                 }
-
-            }
         }
     }
 

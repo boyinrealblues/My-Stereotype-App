@@ -48,9 +48,15 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
             Log.e(TAG,supportFragmentManager.fragments.toString()+" "+supportFragmentManager.fragments.size.toString())
             if(supportFragmentManager.fragments[supportFragmentManager.fragments.size-1]::class.toString().equals(BlankFragment3::class.toString()))
                 binding.drawerLayout.openDrawer(GravityCompat.START)
-            else
-                supportFragmentManager.popBackStack()
-        }
+            else {
+                val bundle = Bundle()
+                bundle.putString("123",supportFragmentManager.fragments[0]::class.toString())
+                supportFragmentManager.beginTransaction().replace(
+                    R.id.container,
+                    BlankFragment3::class.java,bundle
+                ).setReorderingAllowed(true).commit()
+            }
+            }
     }
 
     //Which tab in pressed , corresponds to which fragment is replaced and uploaded, Home fragment is getting replaced here

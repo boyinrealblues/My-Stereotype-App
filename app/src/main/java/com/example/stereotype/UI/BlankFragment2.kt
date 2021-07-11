@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.stereotype.R
 import com.example.stereotype.databinding.FragmentBlank2Binding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BlankFragment2 : Fragment() {
 
@@ -16,6 +17,14 @@ class BlankFragment2 : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         return DataBindingUtil.inflate<FragmentBlank2Binding>(inflater,R.layout.fragment_blank2,container,false).root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.visibility = View.VISIBLE
+        activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.run{
+            setNavigationIcon(R.drawable.ic_back)
+        }
     }
 
 }
