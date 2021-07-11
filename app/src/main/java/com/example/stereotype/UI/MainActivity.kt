@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
         //Suppose the activity gets destroyed, We are not redrawing it again
         if(savedInstanceState==null)
         {
+            Log.e(TAG,"SAVED INSTANCES STATE CHECK BLOCK EXECUTED")
             //This block will be executed only once the activity is created
             supportFragmentManager.commit {
                 add<BlankFragment3>(R.id.container)
@@ -42,11 +43,11 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
         setSupportActionBar(binding.toolbar)
         binding.bottomNavView.setOnNavigationItemSelectedListener(this)
         //On Back button tap Move back to the home activity
-        binding.toolbar.setNavigationOnClickListener{
-            Log.e(TAG,supportFragmentManager.fragments[0].toString())
-            if(supportFragmentManager.fragments[0]::class.toString().equals(BlankFragment3::class.toString()))
 
-                binding.drawerLayout.openDrawer(Gravity.LEFT)
+        binding.toolbar.setNavigationOnClickListener{
+            Log.e(TAG,supportFragmentManager.fragments.toString()+" "+supportFragmentManager.fragments.size.toString())
+            if(supportFragmentManager.fragments[supportFragmentManager.fragments.size-1]::class.toString().equals(BlankFragment3::class.toString()))
+                binding.drawerLayout.openDrawer(GravityCompat.START)
             else
                 supportFragmentManager.popBackStack()
         }

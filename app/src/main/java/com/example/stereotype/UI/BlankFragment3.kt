@@ -38,7 +38,6 @@ class BlankFragment3 : Fragment() {
         activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.visibility = View.INVISIBLE
         activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.run {
             setNavigationIcon(R.drawable.ic_menu)
-
         }
         //On button tap , replace home fragment
             binding.button.setOnClickListener {
