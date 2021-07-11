@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Layout
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.add
@@ -39,10 +41,14 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
         binding.bottomNavView.setOnNavigationItemSelectedListener(this)
-
         //On Back button tap Move back to the home activity
         binding.toolbar.setNavigationOnClickListener{
-            supportFragmentManager.popBackStack()
+            Log.e(TAG,supportFragmentManager.fragments[0].toString())
+            if(supportFragmentManager.fragments[0]::class.toString().equals(BlankFragment3::class.toString()))
+
+                binding.drawerLayout.openDrawer(Gravity.LEFT)
+            else
+                supportFragmentManager.popBackStack()
         }
     }
 
