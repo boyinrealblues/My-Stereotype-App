@@ -23,7 +23,8 @@ class BlankFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.visibility = View.VISIBLE
-        activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.setNavigationIcon(R.drawable.ic_back)
-
+        activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)?.run{
+            setNavigationIcon(R.drawable.ic_back)
+        }
     }
 }
